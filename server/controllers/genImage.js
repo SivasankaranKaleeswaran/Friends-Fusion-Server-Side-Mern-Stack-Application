@@ -14,9 +14,6 @@ aws.config.update({
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const s3 = new aws.S3();
 
-
-
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
