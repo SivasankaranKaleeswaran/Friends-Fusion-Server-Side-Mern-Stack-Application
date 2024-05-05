@@ -103,6 +103,26 @@ const uploads3 = multer({
     })
 });
 
+app.patch("/user/update/:id",async (req, res)=>
+{
+  try {
+    const {id} = req.params;
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+
+    if (!updatedUser) {
+        return res.status(404).send({ message: "User not found" });
+    }
+
+    console.log(updatedUser); // Logging the updated user
+    res.json(updatedUser); // Sending the updated user back to the client
+  }
+
+  catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
+  console.log("hello");
+});
 
 app.post('/aws/upload', uploads3.single('file'), async function (req, res, next) {
     res.json({message:'Successfully uploaded ' + req.file.location + ' location!',
